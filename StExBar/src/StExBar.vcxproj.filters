@@ -132,6 +132,9 @@
     <ClCompile Include="..\..\sktoolslib\InfoRtfDialog.cpp">
       <Filter>sktoolslib</Filter>
     </ClCompile>
+    <ClCompile Include="InclusiveSort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="StExBar.def">
@@ -305,6 +308,15 @@
     <ClInclude Include="NameDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IListView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IOwnerDataCallback.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Filter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="StExBar.rc">
@@ -320,5 +332,10 @@
     <Manifest Include="..\..\compatibility.manifest">
       <Filter>Resource Files</Filter>
     </Manifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\signinfo.txt">
+      <Filter>Build</Filter>
+    </Text>
   </ItemGroup>
 </Project>

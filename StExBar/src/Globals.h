@@ -24,3 +24,9 @@
 
 extern HINSTANCE g_hInst;
 extern UINT      g_DllRefCount;
+
+// New Sort
+//extern int       g_SortColumn;
+//extern bool      g_sortAscending;
+
+//#define HINST_THISDLL g_hInst

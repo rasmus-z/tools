@@ -22,6 +22,21 @@
 #include "StringUtils.h"
 #include "OnOutOfScope.h"
 #include <regex>
+#include "IListView.h"
+#include "Filter.h"
+
+bool SortStrings(const std::wstring& s1, const std::wstring& s2, bool ascending)
+{
+    if (s1.empty() && s2.empty())
+        return false;
+    if (s1.empty())
+        return false;
+    if (s2.empty())
+        return true;
+
+    auto compare = ::_wcsicmp(s2.c_str(), s1.c_str());
+    return ascending ? compare > 0 : compare < 0;
+}
 
 bool CDeskBand::Filter(LPTSTR filter)
 {
@@ -110,6 +125,15 @@ bool CDeskBand::Filter(LPTSTR filter)
                                         // and restore the view after we're done.
                                         viewType = SendMessage(listView, LVM_GETVIEW, 0, 0);
                                         SendMessage(listView, LVM_SETVIEW, LV_VIEW_DETAILS, 0);
+
+                                        IListView_Win7* pLvw = NULL;
+                                        SendMessage(listView, LVM_QUERYINTERFACE, reinterpret_cast<WPARAM>(&IID_IListView_Win7), reinterpret_cast<LPARAM>(&pLvw));
+                                        if (pLvw)
+                                        {
+                                            pLvw->EnableAlphaShadow(true);
+                                            // pLvw->
+                                            pLvw->Release();
+                                        }
                                     }
                                     std::vector<LPITEMIDLIST> noShows;
                                     noShows.reserve(nCount);
@@ -220,4 +244,36 @@ bool CDeskBand::CheckDisplayName(IShellFolder* shellFolder, LPITEMIDLIST pidl, L
         }
     }
     return false;
+}
+
+LONG CompareLastWriteTime(const std::wstring& filePathA, const std::wstring& filePathB)
+{
+    FILETIME                  ftAWrite;
+    WIN32_FILE_ATTRIBUTE_DATA fAData = {0};
+
+    if (0 == GetFileAttributesEx(filePathA.c_str(), GetFileExInfoStandard, &fAData))
+    {
+        //Logger::getInstance()->error(CStringUtils::Format("GetFileAttributesEx on %s failed with %d\n", filePathA, GetLastError()));
+        printf("GetFileAttributesEx failed with %d\n", GetLastError());
+        return 0;
+    }
+    else
+    {
+        ftAWrite = fAData.ftLastWriteTime;
+    }
+
+    FILETIME                  ftBWrite;
+    WIN32_FILE_ATTRIBUTE_DATA fBData = {0};
+    if (0 == GetFileAttributesEx(filePathB.c_str(), GetFileExInfoStandard, &fBData))
+    {
+        //Logger::getInstance()->error(CStringUtils::Format("GetFileAttributesEx on %s failed with %d\n", filePathB, GetLastError()));
+        printf("GetFileAttributesEx failed with %d\n", GetLastError());
+        return 0;
+    }
+    else
+    {
+        ftBWrite = fBData.ftLastWriteTime;
+    }
+
+    return CompareFileTime(&ftAWrite, &ftBWrite);
 }

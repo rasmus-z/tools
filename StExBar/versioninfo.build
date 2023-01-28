@@ -3,12 +3,14 @@
 
     <target name="versioninfo">
 
-        <exec program="GitWCRev.exe">
+		<!--
+        <exec program="SubWCRev.exe">
             <arg value="." />
             <arg value="version.build.in" />
             <arg value="version.build" />
         </exec>
-
+		-->
+		
         <nant target="setversioninfo">
             <buildfiles>
                 <include name="version.build" />
