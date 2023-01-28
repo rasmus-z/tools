@@ -24,3 +24,5 @@
     const type name = {l,w1,w2,{b1,b2,b3,b4,b5,b6,b7,b8}}
 
 MIDL_DEFINE_GUID(IID, IID_IShellFolderView, 0x37A378C0, 0xF82D, 0x11CE, 0xAE, 0x65, 0x08, 0x00, 0x2B, 0x2E, 0x12, 0x62);
+
+#define LVM_QUERYINTERFACE (LVM_FIRST + 189)

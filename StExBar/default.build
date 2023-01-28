@@ -31,8 +31,9 @@
     <property name="verstring" value="${environment::get-variable('MajorVersion')}.${environment::get-variable('MinorVersion')}.${environment::get-variable('MicroVersion')}" />
     <property name="verstringfull" value="${verstring}.${environment::get-variable('WCREV')}" />
 
+<!--
     <exec program="msbuild.exe" >
-      <arg value="StExBar.sln" />
+      <arg value="StExBar.InclusiveSort.sln" />
       <arg value="/t:Rebuild" />
       <arg value="/p:Configuration=Debug" />
       <arg value="/p:Platform=Win32" />
@@ -40,16 +41,17 @@
       <arg value="/maxcpucount" />
     </exec>
     <exec program="msbuild.exe" >
-      <arg value="StExBar.sln" />
+      <arg value="StExBar.InclusiveSort.sln" />
       <arg value="/t:Rebuild" />
       <arg value="/p:Configuration=Release" />
       <arg value="/p:Platform=Win32" />
       <arg value="/verbosity:minimal" />
       <arg value="/maxcpucount" />
     </exec>
+-->
 
     <exec program="msbuild.exe" >
-      <arg value="StExBar.sln" />
+      <arg value="StExBar.InclusiveSort.sln" />
       <arg value="/t:Rebuild" />
       <arg value="/p:Configuration=Debug" />
       <arg value="/p:Platform=x64" />
@@ -57,7 +59,7 @@
       <arg value="/maxcpucount" />
     </exec>
     <exec program="msbuild.exe" >
-      <arg value="StExBar.sln" />
+      <arg value="StExBar.InclusiveSort.sln" />
       <arg value="/t:Rebuild" />
       <arg value="/p:Configuration=Release" />
       <arg value="/p:Platform=x64" />
@@ -80,6 +82,7 @@
     </if>
 
 
+<!--
     <exec program="candle">
       <arg value="-nologo" />
       <arg value="-out" />
@@ -95,6 +98,7 @@
       <arg value="bin\StExBar-${verstring}.msi" />
       <arg value="bin\Setup.wixobj" />
     </exec>
+-->
 
     <exec program="candle">
       <arg value="-nologo" />
@@ -129,54 +133,6 @@
         <arg value="bin\StExBar-${verstring}.msi" />
       </exec>
     </if>
-
-    <exec program="checksum" output="bin\checksum.txt">
-      <arg value="-t" />
-      <arg value="sha256" />
-      <arg value="-f" />
-      <arg value="bin\StExBar-${verstring}.msi" />
-    </exec>
-    <loadfile file="bin\checksum.txt" property="checksum" />
-    <exec program="checksum" output="bin\checksum64.txt">
-      <arg value="-t" />
-      <arg value="sha256" />
-      <arg value="-f" />
-      <arg value="bin\StExBar64-${verstring}.msi" />
-    </exec>
-    <loadfile file="bin\checksum64.txt" property="checksum64" />
-
-    <loadfile file="choco\stexbar.nuspec" property="nuspecfile">
-      <filterchain>
-        <replacetokens begintoken="$" endtoken="$">
-          <token key="MajorVersion" value="${environment::get-variable('MajorVersion')}" />
-          <token key="MinorVersion" value="${environment::get-variable('MinorVersion')}" />
-          <token key="MicroVersion" value="${environment::get-variable('Microversion')}" />
-          <token key="WCREV" value="${environment::get-variable('WCREV')}" />
-          <token key="WCDATE" value="${environment::get-variable('WCDATE')}" />
-        </replacetokens>
-      </filterchain>
-    </loadfile>
-    <echo file="choco\package\stexbar.nuspec" message="${nuspecfile}" />
-    <loadfile file="choco\chocolateyInstall.ps1" property="cinstfile">
-      <filterchain>
-        <replacetokens begintoken="$" endtoken="$">
-          <token key="MajorVersion" value="${environment::get-variable('MajorVersion')}" />
-          <token key="MinorVersion" value="${environment::get-variable('MinorVersion')}" />
-          <token key="MicroVersion" value="${environment::get-variable('Microversion')}" />
-          <token key="WCREV" value="${environment::get-variable('WCREV')}" />
-          <token key="WCDATE" value="${environment::get-variable('WCDATE')}" />
-          <token key="checksum" value="${string::trim(checksum)}" />
-          <token key="checksum64" value="${string::trim(checksum64)}" />
-        </replacetokens>
-      </filterchain>
-    </loadfile>
-    <echo file="choco\package\tools\chocolateyInstall.ps1" message="${cinstfile}" />
-    <echo>
-      now start an admin console in choco\package and then run
-      choco pack
-      to upload the package, run
-      cpush StExBar-x.x.x.nupkg
-    </echo>
 
   </target>
 

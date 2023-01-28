@@ -7,7 +7,8 @@
 //
 // Generated from the TEXTINCLUDE 2 resource.
 //
-#include "afxres.h"
+#include "afxres.h"
+
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
@@ -70,7 +71,7 @@ FONT 9, "MS Shell Dlg 2", 400, 0, 0x1
 BEGIN
     LTEXT           "Stefan's Tools - tools.stefankueng.com",IDC_LINK,7,7,177,8
     LTEXT           "StExBar v1.11.1",IDC_VERSIONSTRING,192,7,94,8
-    LTEXT           "Copyright 2007-2020 Stefan Küng",IDC_STATIC,7,17,177,8
+    LTEXT           "Copyright 2007-2020 Stefan KÃ¼ng",IDC_STATIC,7,17,177,8
     GROUPBOX        "Misc",IDC_STATIC,7,28,315,115
     CONTROL         "Show button text on toolbar",IDC_SHOWTEXT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,41,107,10
     CONTROL         "Copy UNC paths",IDC_USEUNCCHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,53,69,10

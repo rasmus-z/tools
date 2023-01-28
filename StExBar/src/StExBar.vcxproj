@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -206,6 +206,7 @@
     <ClCompile Include="EditCmdDlg.cpp" />
     <ClCompile Include="ExPaths.cpp" />
     <ClCompile Include="Filter.cpp" />
+    <ClCompile Include="InclusiveSort.cpp" />
     <ClCompile Include="InfoDlg.cpp" />
     <ClCompile Include="NameDlg.cpp" />
     <ClCompile Include="NewFolder.cpp" />
@@ -270,9 +271,12 @@
     <ClInclude Include="ClassFactory.h" />
     <ClInclude Include="Commands.h" />
     <ClInclude Include="EditCmdDlg.h" />
+    <ClInclude Include="Filter.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Guid.h" />
+    <ClInclude Include="IListView.h" />
     <ClInclude Include="InfoDlg.h" />
+    <ClInclude Include="IOwnerDataCallback.h" />
     <ClInclude Include="maxpath.h" />
     <ClInclude Include="NameDlg.h" />
     <ClInclude Include="NumberReplacer.h" />
@@ -291,6 +295,9 @@
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="..\..\compatibility.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\signinfo.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
